@@ -143,12 +143,12 @@ void Simulation::renderParticles()
 {
     /* TEMP */
     
-    double minAcc = cluster[0]->acceleration.length();
-    double maxAcc = cluster[0]->acceleration.length();
+    double minAcc = cluster[0]->speed.length();
+    double maxAcc = cluster[0]->speed.length();
 	
     for (Particle* p : cluster)
     {
-        double acc = p->acceleration.length();
+        double acc = p->speed.length();
         minAcc = std::min(minAcc, acc);
         maxAcc = std::max(maxAcc, acc);
     }

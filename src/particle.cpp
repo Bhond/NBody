@@ -37,7 +37,9 @@ void Particle::render(double minAcc, double maxAcc, double scaleWidth, double sc
 	float oy = origin.y - (position.y / scaleHeight);
 
 	double d = (maxAcc - minAcc);
-	double c = d > 0.0 ? 1 - (maxAcc - acceleration.length()) / (maxAcc - minAcc) : 1;
+	double oldc = d > 0.0 ? 1 - (maxAcc - speed.length()) / (maxAcc - minAcc) : 1;
+	double c = d > 0.0 ? (speed.length() - minAcc) / d : 1;
+	
 	Color col = linearGradient(c);
 
 	p_shape->setFillColor(sf::Color(col.r, col.g, col.b, col.a));

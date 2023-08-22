@@ -27,45 +27,10 @@ void Solver::solve(std::vector<Particle*>& cluster, double dt_s)
 	double d = std::max(maxCorner.x - minCorner.x, maxCorner.y - minCorner.y);
 	grid->buildTree(Vector2(-d,-d), Vector2(d, d), cluster);
 	solveFromTree(cluster, dt_s);
-
-	//for (int i = 0; i < cluster.size(); i++)
-	//{
-	//	cluster[i]->acceleration.x = 0;
-	//	cluster[i]->acceleration.y = 0;
-	//}
-
-	///*for (int i = 0; i < cluster.size(); i++)
-	//{
-	//	solveAcc(i, cluster);
-	//	solveSpeed(cluster[i], dt_s);
-	//	solvePos(cluster[i], dt_s);
-	//}*/
 }
 
 void Solver::solveFromTree(std::vector<Particle*>& cluster, double dt_s)
-{
-	//std::vector<std::thread> th;
-	//auto acc = [this, cluster](int i)
-	//{
-	//	int toto = cluster.size() / 1;
-	//	int size = cluster.size();
-	//	int end = std::min(i * toto + toto, size);
-	//	for (int idx = i * toto; idx < end; idx++) 
-	//	{
-	//		cluster[idx]->acceleration = solveNodeAcc(cluster[idx], grid->getRoot());
-	//	};
-	//};
-
-	//for (int i = 0; i < 1; ++i) {
-	//	th.push_back(std::thread(acc, i));
-	//}
-
-	////Join the threads with the main thread
-	//for (auto& t : th) 
-	//{
-	//	t.join();
-	//}
-	
+{	
 	for (Particle* p : cluster)
 	{
 		p->acceleration = solveNodeAcc(p, grid->getRoot());
