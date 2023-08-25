@@ -9,24 +9,14 @@ struct Color
     uint8_t g = 0;
     uint8_t b = 0;
     uint8_t a = 255;
-    double stop = 0;
 };
 
 static const std::vector<Color> Colors = {
-    {127, 0, 255, 255, 0},
-    {255, 0, 0, 255  , 0.25},
-    {0, 255, 0, 255  , 0.75},
-    {255, 255, 255, 255, 1 },
-    {5, 241, 218},
-    {255, 80, 0},
-    {213, 183, 122},
-    {189, 183, 107},
-    {66, 100, 127},
-    {237, 203, 98},
-    {237, 237, 237}
+    {255, 50, 0, 255},
+    {0, 200, 255, 255}
 };
 
-static Color colorLerp(Color col0, Color col1, double c)
+static Color colorLerp(const Color& col0, const Color& col1, const double& c)
 {
     return {
              (uint8_t)(col0.r + (col1.r - col0.r) * c),
@@ -36,7 +26,7 @@ static Color colorLerp(Color col0, Color col1, double c)
            };
 }
 
-static Color linearGradient(double c)
+static Color linearGradient(const double& c)
 {
     double stopLength = 1 / ((double) Colors.size() - 1);
     double ratio = c / stopLength;

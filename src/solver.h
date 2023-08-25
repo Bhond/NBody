@@ -20,12 +20,11 @@ public:
 	~Solver();
 
 public:
-	void solve(std::vector<Particle*>& cluster, double dt_s);
-	void solveFromTree(std::vector<Particle*>& cluster, double dt_s);
+	void solve(std::vector<Particle*>& cluster, const double& dt_s);
+	void solveFromTree(std::vector<Particle*>& cluster, const double& dt_s);
 	Vector2 solveNodeAcc(Particle* pTarget, Node* node);
-	void solveAcc(int idx, std::vector<Particle*>& cluster);
 	Vector2 solveAcc(Particle* p0, Particle* p1);
 	Vector2 solveAcc(Particle* p0, Node* p1);
-	void solveSpeed(Particle* particle, double dt_s);
-	void solvePos(Particle* particle, double dt_s);
+	void solveSpeed(Particle* particle, const double& dt_s);
+	void solvePos(Particle* particle, const double& dt_s);
 };

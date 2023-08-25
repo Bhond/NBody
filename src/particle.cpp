@@ -1,18 +1,18 @@
 #include "particle.h"
 
-Particle::Particle(sf::RenderWindow* w, double r, const Vector2& o, Vector2 startingPosition)
+Particle::Particle(sf::RenderWindow* w, const double& r, const Vector2& o, const Vector2& startingPosition)
 	: window(w), radius(r), origin(o), position(startingPosition), startingPosition(startingPosition), startingSpeed(startingSpeed)
 {
 	init();
 }
 
-Particle::Particle(sf::RenderWindow* w, double r, const Vector2& o, Vector2 startingPosition, Vector2 startingSpeed)
+Particle::Particle(sf::RenderWindow* w, const double& r, const Vector2& o, const Vector2& startingPosition, const Vector2& startingSpeed)
 	: window(w), radius(r), origin(o), position(startingPosition), speed(startingSpeed), startingPosition(startingPosition), startingSpeed(startingSpeed)
 {
 	init();
 }
 
-Particle::Particle(sf::RenderWindow* w, double r, const Vector2& o, double m, Vector2 startingPosition, Vector2 startingSpeed)
+Particle::Particle(sf::RenderWindow* w, const double& r, const Vector2& o, const double& m, const Vector2& startingPosition, const Vector2& startingSpeed)
 	: window(w), radius(r), origin(o), mass(m), position(startingPosition), speed(startingSpeed), startingPosition(startingPosition), startingSpeed(startingSpeed)
 {
 	init();
@@ -30,15 +30,14 @@ void Particle::init()
 	p_shape->setFillColor(color);
 }
 
-void Particle::render(double minAcc, double maxAcc, double scaleWidth, double scaleHeight, double zoomFactor)
+void Particle::render(const double& colorMinBound, const double& colorMaxBound, const double& colorCoeff, const double& scaleWidth, const double& scaleHeight, const double& zoomFactor)
 {
 	// Offset to the window's center
 	float ox = origin.x + (position.x / scaleWidth);
 	float oy = origin.y - (position.y / scaleHeight);
 
-	double d = (maxAcc - minAcc);
-	double oldc = d > 0.0 ? 1 - (maxAcc - speed.length()) / (maxAcc - minAcc) : 1;
-	double c = d > 0.0 ? (speed.length() - minAcc) / d : 1;
+	double d = (colorMaxBound - colorMinBound);
+	double c = d > 0.0 ? (colorCoeff - colorMinBound) / d : 1;
 	
 	Color col = linearGradient(c);
 

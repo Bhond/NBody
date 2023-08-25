@@ -19,13 +19,13 @@ For those who want to play with it and/or develop on top of it, here are my reco
 
 I only compiled it on windows x64. (Linux on its way, maybe...). I am using Visual Studio 2022.
 
-Make sure cmake and gcc are installed.
+Make sure cmake is installed and that you can compile c++.
 
 - Install **VCPKG**:
 	Follow these steps: https://vcpkg.io/en/getting-started.html
 	
 - Using **VCPKG**, you'll need:
-	1. Qt:x64-windows (very long...)
+	1. Qt5:x64-windows (very long...)
 	2. SFML:x64-windows
 	3. OpenGL:x64-windows
 

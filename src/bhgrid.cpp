@@ -210,14 +210,7 @@ void BHGrid::renderNode(Node* node, const Vector2& origin, const Vector2& scale)
 	shape.setOutlineColor(sf::Color(255, 50, 0, 255));
 	shape.setFillColor(sf::Color::Transparent);
 
-	// Mass distribution
-	//sf::CircleShape massShape {10};
-	//massShape.setOrigin(5, 5);
-	//massShape.move(origin.x + node->centerOfMass.x / scale.x, origin.y - node->centerOfMass.y / scale.y);
-	//massShape.setFillColor(sf::Color::Green);
-
 	window->draw(shape);
-	//window->draw(massShape);
 
 }
 

@@ -10,7 +10,7 @@ Solver::~Solver()
 	delete grid;
 }
 
-void Solver::solve(std::vector<Particle*>& cluster, double dt_s)
+void Solver::solve(std::vector<Particle*>& cluster, const double& dt_s)
 {
 
 	Vector2 minCorner{ 1e8 / 8, 1e8/ 8 };
@@ -22,6 +22,7 @@ void Solver::solve(std::vector<Particle*>& cluster, double dt_s)
 		minCorner.y = std::min(minCorner.y, p->position.y);
 		maxCorner.x = std::max(maxCorner.x, p->position.x);
 		maxCorner.y = std::max(maxCorner.y, p->position.y);
+		p->thetaCount = 0;
 	}
 
 	double d = std::max(maxCorner.x - minCorner.x, maxCorner.y - minCorner.y);
@@ -29,7 +30,7 @@ void Solver::solve(std::vector<Particle*>& cluster, double dt_s)
 	solveFromTree(cluster, dt_s);
 }
 
-void Solver::solveFromTree(std::vector<Particle*>& cluster, double dt_s)
+void Solver::solveFromTree(std::vector<Particle*>& cluster, const double& dt_s)
 {	
 	for (Particle* p : cluster)
 	{
@@ -61,25 +62,13 @@ Vector2 Solver::solveNodeAcc(Particle* pTarget, Node* node)
 			for (Node* n : node->leafs)
 			{
 				if (n)
+				{
 					force += solveNodeAcc(pTarget, n);
+					pTarget->thetaCount++;
+				}
 			}
 		}
 		return force;
-	}
-}
-
-void Solver::solveAcc(int idx, std::vector<Particle*>& cluster)
-{
-	for (int i = idx + 1; i < cluster.size(); i++)
-	{
-		Vector2 r = cluster[idx]->position - cluster[i]->position;
-		Vector2 direction = r.unit();
-		double d = r.length();
-		double c = - G * cluster[idx]->mass * cluster[i]->mass;
-		double x = (c / pow(d, 2)) * direction.x;
-		double y = (c / pow(d, 2)) * direction.y;
-		cluster[idx]->acceleration += Vector2(x, y) * (1 / cluster[idx]->mass);
-		cluster[i]->acceleration -= Vector2(x, y) * (1 / cluster[i]->mass);
 	}
 }
 
@@ -105,12 +94,12 @@ Vector2 Solver::solveAcc(Particle* p, Node* node)
 		return Vector2(x, y) * (1 / p->mass);
 }
 
-void Solver::solveSpeed(Particle* particle, double dt_s)
+void Solver::solveSpeed(Particle* particle, const double& dt_s)
 {
 	particle->speed += particle->acceleration * dt_s;
 }
 
-void Solver::solvePos(Particle* particle, double dt_s)
+void Solver::solvePos(Particle* particle, const double& dt_s)
 {
 	particle->position += particle->speed * dt_s;
 }

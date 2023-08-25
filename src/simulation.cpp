@@ -141,23 +141,19 @@ void Simulation::render()
 
 void Simulation::renderParticles()
 {
-    /* TEMP */
-    
-    double minAcc = cluster[0]->speed.length();
-    double maxAcc = cluster[0]->speed.length();
+    double minBound = cluster[0]->thetaCount;
+    double maxBound = cluster[0]->thetaCount;
 	
     for (Particle* p : cluster)
     {
-        double acc = p->speed.length();
-        minAcc = std::min(minAcc, acc);
-        maxAcc = std::max(maxAcc, acc);
+        double acc = p->thetaCount;
+        minBound = std::min(minBound, acc);
+        maxBound = std::max(maxBound, acc);
     }
-
-    /* TEMP */
 
     for (Particle* p : cluster)
     {
-        p->render(minAcc, maxAcc, scaleWidth, scaleHeight, zoomFactor);
+        p->render(minBound, maxBound, p->thetaCount, scaleWidth, scaleHeight, zoomFactor);
     }
 }
 
