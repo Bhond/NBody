@@ -1,4 +1,6 @@
+# Cmake setup
 cmake_minimum_required(VERSION 3.26)
 project("NBody")
 
+# Directories
 add_subdirectory("src")

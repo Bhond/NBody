@@ -4,7 +4,9 @@
 
 #include <qapplication.h>
 #include <qwindow.h>
+#include "GL\freeglut.h"
 
+#include "common.h"
 #include "vc.h"
 
 class App

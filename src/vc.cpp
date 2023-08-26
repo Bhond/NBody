@@ -8,6 +8,7 @@ VC::VC()
 VC::~VC()
 {
 	delete simulation;
+	delete qglcanvas;
 	delete playButton;
 	delete pauseButton;
 	delete resetButton;
@@ -36,11 +37,15 @@ void VC::onInit()
 	float simWidth = Width - posX - anchorX;
 	float simHeight = controlContainerHeight;
 
-	simulation = new Simulation(this, QPoint(posX, posY), QSize(simWidth, simHeight), 1);
-	simulation->show();
+	/*simulation = new Simulation(this, QPoint(posX, posY), QSize(simWidth, simHeight), 1);
+	simulation->show();*/
+
+	qglcanvas = new QGLCanvas(this);
+	qglcanvas->resize(QSize(simWidth, simHeight));
+	qglcanvas->move(QPoint(posX, posY));
 
 	// Controls
-	float controlsX = 0.5 * controlContainerWidth;
+	/*float controlsX = 0.5 * controlContainerWidth;
 	float controlsY = margin;
 	float controlsStep = 10;
 
@@ -86,7 +91,7 @@ void VC::onInit()
 	float overlayBoxX = controlsX - overlayBox->size().width() * 0.5;
 	controlsY += controlsStep + gField->size().height();
 	overlayBox->move(QPoint(overlayBoxX, controlsY));
-	connect(overlayBox, SIGNAL(stateChanged(int)), simulation, SLOT(toggleOverlay()));
+	connect(overlayBox, SIGNAL(stateChanged(int)), simulation, SLOT(toggleOverlay()));*/
 }
 
 void VC::display()
@@ -94,9 +99,9 @@ void VC::display()
 	this->show();
 
 	// Update field values at start, not available before
-	scaleWidthField->setValue(simulation->getScaleWidth());
-	scaleHeightField->setValue(simulation->getScaleHeight());
-	gField->setValue(simulation->getG());
+	//scaleWidthField->setValue(simulation->getScaleWidth());
+	//scaleHeightField->setValue(simulation->getScaleHeight());
+	//gField->setValue(simulation->getG());
 }
 
 void VC::onScaleWidthFieldValueChanged()

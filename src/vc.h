@@ -6,6 +6,7 @@
 #include <qcheckbox.h>
 
 #include "simulation.h"
+#include "qglcanvas.h"
 
 class VC : public QMainWindow
 {
@@ -16,6 +17,7 @@ private:
 	const float Height = 1500;
 
 	Simulation* simulation = nullptr;
+	QGLCanvas* qglcanvas = nullptr;
 	QPushButton* playButton = nullptr;
 	QPushButton* pauseButton = nullptr;
 	QPushButton* resetButton = nullptr;

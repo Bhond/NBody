@@ -11,9 +11,10 @@ App::~App()
 
 void App::onInit(int argc, char* argv[])
 {
+	glutInit(&argc, argv);
 	a = new QApplication(argc, argv);
 
-	QFile styleFile("E:/WorkspaceCpp/NBody/res/theme.qss");
+	QFile styleFile(PATH_ROOT"/res/theme.qss" );
 	styleFile.open(QFile::ReadOnly);
 	QString styleSheet = QLatin1String(styleFile.readAll());
 	a->setStyleSheet(styleSheet);
